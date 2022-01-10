@@ -1,0 +1,14 @@
+{% for email, keyCategories in categoryByUser %}
+    <div>{{ email }}</div>
+    <a class="d-block category-link {% if keyCategories['backlog'][0].id == currentCategory.id %}category-selected{% endif %}" href="{{ path('task_filter_index', {'id': keyCategories['backlog'][0].id}) }}">
+        <span class="badge badge-backlog mr-2">{{ durations[keyCategories['backlog'][0].id] | to_hours_or_days }}</span> {{ keyCategories['backlog'][0].title }}            
+    </a>
+    {% for category in keyCategories['other'] %}
+        <a class="d-block category-link {% if currentCategory and category.id == currentCategory.id %}category-selected{% endif %}" href="{{ path('task_filter_index', {'id': category.id}) }}">
+            <span class="badge badge-orange mr-2">{{ durations[category.id] | to_hours_or_days }}</span> {{ category.title }}            
+        </a>
+    {% endfor %}
+    <a class="d-block category-link {% if keyCategories['done'][0].id == currentCategory.id %}category-selected{% endif %}" href="{{ path('task_filter_index', {'id': keyCategories['done'][0].id}) }}">
+        <i class="fas fa-check-square mr-2 green"></i> {{ keyCategories['done'][0].title }}            
+    </a>
+{% endfor %}

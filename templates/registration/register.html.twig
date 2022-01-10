@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Account{% endblock %}
+
+{% block body %}
+<main class="container">
+    <h1 class="display-4 my-5">Sign up</h1>
+
+    {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.plainPassword, {
+            label: 'Password'
+        }) }}
+
+        <button id="signIn" class="btn btn-lg btn-outline-success my-4 py-2" type="submit">
+        Get started
+        </button>
+    {{ form_end(registrationForm) }}
+</main>
+{% endblock %}

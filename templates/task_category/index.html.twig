@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Category List{% endblock %}
+
+{% block body %}
+
+<section class="container">
+    <h1 class="mt-5 mb-5">List of task categories</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Duration</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for email, keyCategories in categoryByUser %}
+            <tr>
+                <td colspan="3">{{ email }}</td>
+            </tr>
+            {% for key, categories in keyCategories %}
+                {% for task_category in categories %}
+                    <tr>
+                        <td>{{ task_category.id }}</td>
+                        <td>{{ task_category.title }}</td>
+                        <td>{{ task_category.duration }}</td>
+                        <td class="icone">
+                            <a data-toggle="tooltip" data-placement="top" title="Voir détails" href="{{ path('task_category_show', {'id': task_category.id}) }}"><i class="fas fa-info-circle fa-lg"></i></a>
+                            <a data-toggle="tooltip" data-placement="top" title="Modifier" href="{{ path('task_category_edit', {'id': task_category.id}) }}"><i class="fas fa-edit fa-lg"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="3">No records found.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+	<a class="btn btn-green" href="{{ path('task_category_new') }}"> <i class="fas fa-plus mr-2"></i>New</a>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Task{% endblock %}
+
+{% block body %}
+    <h1 class="mt-5 mb-5">Tâche</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ task.id }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ task.description | raw }}</td>
+            </tr>
+            <tr>
+                <th>Priorité</th>
+                <td>{{ task.priority }}</td>
+            </tr>
+            <tr>
+                <th>Durée estimée</th>
+                <td>{{ task.expectedDuration }}</td>
+            </tr>
+            <tr>
+                <th>Durée réelle</th>
+                <td>{{ task.actualDuration }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-info mb-3" href="{{ path('task_edit', {'id': task.id}) }}">Modifier</a>
+
+    {{ include('task/_delete_form.html.twig') }}
+    <br />
+    <a class="mt-5" href="{{ path('task_index', {'id': 1}) }}">Retour à la liste</a>
+{% endblock %}

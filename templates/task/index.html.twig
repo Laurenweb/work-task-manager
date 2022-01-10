@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/task/index.css') }}"/>
+{% endblock %}
+
+{% block title %}
+	Liste des tâches
+{% endblock %}
+
+{% block body %}
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-2 bg-dark text-white p-4 min-vh-100">
+				{{ include('task/menu.html.twig', {'categoryByUser' : categoryByUser}) }}
+			</div>
+			<div class="col-md-10">
+				{{ include('task/tasks_to_be_done.html.twig', {'tasks' : tasks, 'remainingDuration' : remainingDuration}) }}
+			</div>
+		</div>
+	</div>
+{% endblock %}

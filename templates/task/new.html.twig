@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle tâche
+{% endblock %}
+
+{% block body %}
+	<h1 class="mt-5 mb-5">Créer une nouvelle tâche</h1>
+
+	{{ form_start(form) }}
+	{{ form_row(form.title, {
+				label: 'Titre'
+			}) }}
+	<div class="row">
+		<div class="col-md">
+			{{ form_row(form.wantedDuration, {
+				label: 'Durée estimée'
+			}) }}
+		</div>
+		<div class="col-md">
+			{{ form_row(form.assignee, {
+				label: 'Responsable'
+			}) }}
+		</div>
+		<div class="col-md">
+			{{ form_row(form.priority, {
+				label: 'Priorité'
+			}) }}
+		</div>
+		<div class="col-md">
+			{{ form_row(form.parentTask, {
+				label: 'Tâche parente'
+			}) }}
+		</div>
+	</div>
+	{{ form_row(form.description) }}
+
+	<button class="btn btn-info mt-3">{{ button_label|default('Enregistrer') }}</button>
+	{{ form_end(form) }}
+	<br />
+	<a class="mt-5" href="{{ path('task_index', {'id': 1}) }}">Retour à la liste</a>
+{% endblock %}

@@ -1,0 +1,73 @@
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: #F8F9FA;
+}
+
+.navbar .brand { 
+    max-height: 40px;
+    max-width: 30%; 
+    overflow: visible;
+    padding-top: 0;
+    padding-bottom: 0; 
+}
+
+a {
+    text-decoration: none !important;
+}
+
+a:hover, a:focus {
+    text-decoration: underline;
+    color: #6e3d7a;
+}
+
+.btn-info {
+    color: #fff;
+    background-color: #ad83b8;
+    border-color: #6e3d7a; /*set the color you want here*/
+}
+
+.btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .btn-info:active:focus, .open>.dropdown-toggle.btn-info {
+    color: #fff;
+    background-color: #ad83b8;
+    border-color: #6e3d7a; /*set the color you want here*/
+}
+
+#xoButton {
+    background-color: #744c7e;
+    color: rgb(255, 255, 255);
+}
+
+.btn-green {
+    background-color: #744c7e;
+    color: rgb(255, 255, 255);
+}
+
+.btn-red {
+    background-color: #db4453;
+    color: rgb(255, 255, 255);
+}
+
+.loginButton {
+    color: #464747;
+    font-size: larger;
+}
+
+#registerButton {
+    background-color: #F8F9FA;
+}
+
+.register {
+    text-decoration: none;
+    color: #464747;
+    font-size: larger;
+    font-weight: bolder;
+}
+
+.badge-orange {
+    background-color: #e99343;
+    color: #FFF;
+}
+
+.green {
+    color: #4ec8a3;
+}

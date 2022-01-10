@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+<div class="container">
+
+    <form method="post">
+
+        <div class="row mt-5">
+
+            <div class="col-sm-6 p-5">
+                <img src="{{ asset('img/add_tasks.png') }}" class="w-100" alt="login-page">
+            </div>
+
+            <div class="col-sm-6">
+    
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                {% if app.user %}
+                    <div class="mb-3">
+                        Vous êtes actuellement connecté(e) au compte 
+                        <a class="text-primary">{{ app.user.username }}</a>, 
+                        <br>
+                        Cliquez
+                        <a href="{{ path('app_logout') }}"><u>ici</u></a> si vous souhaitez vous connecter à un autre compte.
+                    </div>
+                {% endif %}
+     
+
+            <h1 class="display-4 my-5">Identification</h1>
+            <label for="inputEmail">Email</label>
+            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+            <br />
+            <label for="inputPassword">Mot de passe</label>
+            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+            <input type="hidden" name="_csrf_token"
+                value="{{ csrf_token('authenticate') }}">
+
+        {#
+            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+            See https://symfony.com/doc/current/security/remember_me.html
+
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" name="_remember_me"> Remember me
+                </label>
+            </div>
+        #}
+
+            <button id="xoButton" class="btn btn-info btn-lg btn-outline-success my-4 py-2" type="submit">
+                S'identifier
+            </button>
+        
+            </div> <!-- Fin div col-sm-6 -->
+        
+        </div> <!-- Fin div row -->
+       
+    </form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,141 @@
+<h2 class="mt-3">
+	<button class="btn btn-{{ currentCategory.type }}" data-toggle="modal" data-target="#exampleModal">
+		<i class="fas fa-plus"></i>
+	</button>
+	{{ currentCategory.title }}
+	{% if remainingDuration > 0 %}
+		<span class="badge badge-orange mx-2">
+			<i class="fas fa-exclamation-triangle"></i>
+			-
+			{{ remainingDuration | to_hours_or_days }}</span>
+	{% endif %}
+</h2>
+
+<table class="table tasks-{{ currentCategory.type }}">
+	<thead>
+		<tr>
+			<th></th>
+			<th class="w-75">
+                Titre <br />
+                <select id="project-select">
+                    <option value="">Tous</option>
+                    {% for project in projects %}
+                        <option value="{{ project }}" {% if qProject == project %}selected{% endif %}>{{ project }}</option>
+                    {% endfor %}
+                </select>
+            </th>
+			{% if not currentCategory.next %}
+				<th>Durée réelle</th>
+            {% else %}
+                <th>Due date <i class="fas fa-sort-amount-down ml-1"></i><br />
+                
+                <select id="due-date-select">
+                    <option value="">Toutes</option>
+                    {% for date in dueDates %}
+                        <option value="{{ date }}" {% if qDueDate == date %}selected{% endif %}>{{ date }}</option>
+                    {% endfor %}
+                </select>
+                </th>
+			{% endif %}
+            <th>Approx.</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for task in tasks %}
+			<tr class="task-header {% if currentCategory.next and task.isLate %}task-red{% endif %}">
+				<td>
+					{% if currentCategory.next %}
+						<a data-toggle="tooltip" data-placement="top" title="Passer à {{ currentCategory.next.title }}" href="{{ path('task_mark_next', {'id': task.id}) }}">
+							<i class="fas fa-arrow-circle-down fa-lg"></i>
+						</a>
+					{% endif %}
+				</td>
+				<td>
+					<div class="mb-2">
+						<span class="task-project mr-1">{{ task.project }}</span> {{ task.title }}
+						<a class="badge badge-{{ currentCategory.type }} badge-task" href="{{ path('task_edit', {'id': task.id}) }}"  data-toggle="tooltip" title="{% if (task.audits | last) %}Le {{ (task.audits | last).createdAt | date('d/m/Y à H:i:s') }} {{ (task.audits | last).user }} - {{ (task.audits | last).action }}{% endif %}">
+							#{{ task.id }}
+						</a>
+					</div>
+					
+					{% if task.description %}
+						<div class="task-description">{{ task.description | raw }}</div>
+					{% endif %}
+				</td>
+				{% if not currentCategory.next %}
+					<td>
+						<span class="task-actual-duration">{{ task.actualDuration | to_hours_or_days }}</span>
+					</td>
+                {% else %}
+                    <td>
+                        <span class="task-due-date">{{ task.dueAt ? task.dueAt|date('d/m/Y') : 'A planifier' }}</span>
+                        {% if task.isLate %}
+                            <br />
+                            <span class="task-late">EN RETARD</span>
+                        {% endif %}
+                    </td>
+				{% endif %}
+				<td>
+					<span>{{ task.expectedDuration | to_hours_or_days }}</span>
+				</td>
+			</tr>
+		{% else %}
+			<tr>
+				<td colspan="5">Aucun enregistrement trouvé.</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Créer une nouvelle tâche</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p>
+					Vous pouvez créer une nouvelle tâche ici
+				</p>
+				{{ form_start(form) }}
+				<div class="my-3">
+					{{ form_widget(form.title, {'attr': {'placeholder': 'Titre'}}) }}
+				</div>
+				<div class="my-3">
+					{{ form_widget(form.wantedDuration, {'attr': {'placeholder': 'Durée'}}) }}
+				</div>
+				<div class="my-3">
+					{{ form_widget(form.dueAt, {'attr': {'placeholder': 'Mise à disposition'}}) }}
+				</div>
+				<div class="my-3">
+					{{ form_widget(form.assignee, {'attr': {'class': 'form-control'}}) }}
+				</div>
+				<div class="my-3">
+					{{ form_widget(form.project, {'attr': {'class': 'form-control'}}) }}
+				</div>
+				<div class="my-3">
+					{{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+				</div>
+				<div class="my-3">
+					<button class="btn btn-info">Ajouter</button>
+				</div>
+				{{ form_end(form) }}
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+    const search = () => {
+        const project = document.getElementById('project-select').value;
+        const dueDate = document.getElementById('due-date-select').value;
+        document.location.href = `{{ path('task_filter_index', {id: currentCategory.id}) }}?project=${project}&dueDate=${dueDate}`;
+    }
+
+    [...document.querySelectorAll('table select')].forEach(x => {
+        x.addEventListener('change', search);
+    })
+</script>

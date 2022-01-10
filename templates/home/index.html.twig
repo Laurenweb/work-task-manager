@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/home/index.css') }}"/>
+{% endblock %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+	<body class="text-center">
+
+		<div class="container">
+	
+			<div class="welcomeDiv">
+				<div class="row align-items-center h-100">
+					<div class="col-md-6 offset-md-3 ml-1 h3">Welcome !
+					<br/>
+						<span id="date-div" class="col-md-6 offset-md-3"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container-fluid">
+			<footer class="welcomeFooter mt-auto">
+
+					<div class="col-md-12 mr-auto">
+						<p><i class="far fa-copyright"></i>2021-2022, Work Task Manager App</p>
+					</div>
+		
+  			</footer>
+		</div>
+
+	</body>
+
+	<script>
+		const dateDiv = document.getElementById('date-div');
+
+			function myDateFunction() {
+			const now = new Date();
+			const nowStr = now.toLocaleTimeString([], { hour12: true});
+			dateDiv.innerHTML = nowStr;
+			}
+
+			setInterval(myDateFunction, 1000);
+	</script>
+
+{% endblock %}

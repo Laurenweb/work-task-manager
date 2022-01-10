@@ -1,0 +1,151 @@
+.task-red {
+    background-color: #ffe6e6;
+    color: #FFF;
+}
+
+tr.task-red td.icone a i {
+    color: #db4453;
+}
+
+tr.task-red td.icone a i.fa-check-circle {
+    color: #FFF;
+}
+
+.task-description {
+    font-size: 14px;
+    color: #999;
+    padding-left: 5px;
+    margin-top: 10px;
+    border-left: 1px solid #CCC;
+}
+
+.task-header {
+    color: #000;
+}
+
+.task-header .badge-info {
+    background-color: #db4453;
+}
+
+.tasks-backlog .fa-arrow-circle-down {
+    color: #db4453;
+}
+
+.tasks-backlog .dropdown-toggle {
+    color: #db4453;
+    cursor: pointer;
+}
+
+.task-due-date {
+    color: #db4453;
+    padding: 5px;
+    font-size: 14px;
+    text-decoration: underline;
+}
+
+.task-project {
+    background-color: #333;
+    padding: 5px;
+    color: #FFF;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+.task-late {
+    background-color: #db4453;
+    padding: 5px;
+    color: #FFF;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+.badge-backlog {
+    background-color: #db4453;
+    color: #FFF;
+}
+
+.btn-backlog {
+    background-color: #db4453;
+    color: #FFF;
+}
+
+.tasks-other .fa-arrow-circle-down {
+    color: #e99343;
+}
+.tasks-other .dropdown-toggle {
+    color: #e99343;
+    cursor: pointer;
+}
+
+.tasks-other .task-estimated-duration {
+    background-color: #e99343;
+    padding: 5px;
+    color: #FFF;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+.badge-other {
+    background-color: #e99343;
+    color: #FFF;
+}
+
+.btn-other {
+    background-color: #e99343;
+    color: #FFF;
+}
+
+.tasks-done .fa-check-circle {
+    color: #4ec8a3;
+}
+
+.tasks-done .badge-info {
+    background-color: #4ec8a3;
+}
+
+.tasks-done a {
+    color: #4ec8a3;
+}
+
+.tasks-done .task-actual-duration {
+    background-color: #4ec8a3;
+    padding: 5px;
+    color: #FFF;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+.badge-done {
+    background-color: #4ec8a3;
+    color: #FFF;
+}
+
+.btn-done {
+    background-color: #4ec8a3;
+    color: #FFF;
+}
+
+.category-link {
+    color: #999;
+    margin: 10px 0;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.category-selected {
+    background-color: #697179;
+    color: #4ec8a3;
+}
+
+.audit-last-track {
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+a.badge-task {
+    color: #FFF;
+}
+
+a.badge-task:hover {
+    color: #FFF;
+}

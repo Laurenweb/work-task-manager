@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Task
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+
+		<h1 class="mt-5">Modification de tâche</h1>
+
+		{{ form_start(form) }}
+        <div class="row">
+            <div class="col-md-8">
+                {{ form_row(form.title, {
+				label: 'Titre'
+			}) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_row(form.project, {
+				label: 'Projet',
+                'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+		<div class="row">
+			<div class="col-md-3">
+				{{ form_row(form.assignee, {
+				label: 'Responsable',
+                attr: {
+                    class: 'form-control'
+                }
+			}) }}
+			</div>
+			<div class="col-md-1">
+				{{ form_row(form.priority, {
+				label: 'Priorité'
+			}) }}
+			</div>
+			<div class="col-md-2">
+				{{ form_row(form.actualDuration, {
+				label: 'Durée réelle'
+			}) }}
+			</div>
+			<div class="col-md-2">
+				{{ form_row(form.expectedDuration, {
+				label: 'Durée estimée'
+			}) }}
+			</div>
+			<div class="col-md-4">
+				{{ form_row(form.dueAt, {
+				label: 'Mise à disposition'
+			}) }}
+			</div>
+		</div>
+		{{ form_row(form.description) }}
+
+		{{ form_row(form.category, {
+                attr: {
+                    class: 'form-control'
+                }
+        }) }}
+
+		<button class="btn btn-info">{{ button_label|default('Enregistrer') }}</button>
+		{{ form_end(form) }}
+
+		{{ include('task/_delete_form.html.twig') }}
+		<br/>
+		<a class="mt-5" href="{{ path('task_index', {'id': 1}) }}">Retour à la liste</a>
+	</div>
+{% endblock %}

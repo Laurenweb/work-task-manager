@@ -1,0 +1,4 @@
+framework:
+    session:
+        # 2 Days lifetime (172800 seconds)
+        cookie_lifetime: 172800

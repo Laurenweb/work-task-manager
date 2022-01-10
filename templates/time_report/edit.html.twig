@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Update a report{% endblock %}
+
+{% block body %}
+    <div class="container pt-4">
+        <h1>Report update</h1>
+
+        {{ include('time_report/_form.html.twig', {'button_label': 'Update'}) }}
+
+        <br />
+
+        {{ include('time_report/_delete_form.html.twig') }}
+    </div>
+{% endblock %}
