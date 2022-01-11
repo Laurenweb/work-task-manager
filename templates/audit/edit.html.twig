@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification d'Audit{% endblock %}
+
+{% block body %}
+    <h1>Modifier un audit</h1>
+
+    {{ include('audit/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+
+    <a href="{{ path('audit_index') }}">Retour à la liste</a>
+{% endblock %}

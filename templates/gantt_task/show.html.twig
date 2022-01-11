@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Planning Gantt{% endblock %}
+
+{% block body %}
+    <h1>Planning Gantt</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ gantt_task.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ gantt_task.name }}</td>
+            </tr>
+            <tr>
+                <th>Créneaux</th>
+                <td>{{ gantt_task.slots ? gantt_task.slots|json_encode : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('gantt_task_edit', {'id': gantt_task.id}) }}">Modifier</a>
+
+    <a href="{{ path('gantt_task_index') }}">Retour à la liste</a>
+
+    {{ include('gantt_task/_delete_form.html.twig') }}
+{% endblock %}

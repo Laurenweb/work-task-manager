@@ -24,6 +24,11 @@ class AppExtension extends AbstractExtension
         ];
     }
 
+    public function isDateChecked(GanttTask $ganttTask, string $date)
+    {
+        return in_array($date, $ganttTask->getSlotArray());
+    }
+
     public function toHoursOrDays(int $minutes) {
         if ($minutes < 60) {
             return $minutes . ' min';

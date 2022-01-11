@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit User{% endblock %}
+{% block title %}Modification d'utilisateur{% endblock %}
 
 {% block body %}
     <main class="container mt-5">
-        <h1>Edit User</h1>
+        <h1>Modifier un utilisateur</h1>
 
-        {{ include('organisation/_form.html.twig', {'button_label': 'Update'}) }}
+        {{ include('organisation/_form.html.twig', {'button_label': 'Enregistrer'}) }}
 
-        <a href="{{ path('organisation_index') }}">back to list</a>
+        <a href="{{ path('organisation_index') }}">Retour à la liste</a>
 
         {{ include('organisation/_delete_form.html.twig') }}
     </main>

@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Time Report{% endblock %}
+{% block title %}Rapport{% endblock %}
 
 {% block body %}
-    <h1>Time Report</h1>
+    <h1>Rapport</h1>
 
     <table class="table">
         <tbody>
@@ -12,23 +12,23 @@
                 <td>{{ time_report.id }}</td>
             </tr>
             <tr>
-                <th>Created at</th>
+                <th>Date de création</th>
                 <td>{{ time_report.createdAt ? time_report.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Starting at</th>
+                <th>Début</th>
                 <td>{{ time_report.startingAt ? time_report.startingAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Ending at</th>
+                <th>Fin</th>
                 <td>{{ time_report.endingAt ? time_report.endingAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('time_report_index') }}">Back to list</a>
+    <a href="{{ path('time_report_index') }}">Retour à la liste</a>
 
-    <a href="{{ path('time_report_edit', {'id': time_report.id}) }}">Edit</a>
+    <a href="{{ path('time_report_edit', {'id': time_report.id}) }}">Modifier</a>
 
     {{ include('time_report/_delete_form.html.twig') }}
 {% endblock %}

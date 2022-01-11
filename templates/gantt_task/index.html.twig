@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des plannings Gantt{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/gantt/index.css') }}"/>
+{% endblock %}
+
+{% block body %}
+    <section class="container m-5">
+        <h1>Plannings Gantt</h1>
+    </section>
+    <section class="container-fluid gantt-chart my-5">
+        <div class="row">
+            <div class="col-md-2">
+                <table>
+                    <tr>
+                        <td class="gantt-head">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="gantt-head">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="gantt-head">&nbsp;</td>
+                    </tr>
+                    {% for email, gantt_tasks in gantt_tasks_by_user %}
+                        <tr>
+                            <td class="gantt-line-cell gantt-actor">{{ email }}</td>
+                        </tr>
+                        {% for gantt_task in gantt_tasks %}
+                        <tr>
+                            <td class="gantt-line-cell">{{ gantt_task.name }}</td>
+                        </tr>
+                        {% endfor %}
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="col-md-10 gantt-timeline">
+                <table>
+                    <tr>
+                        {% for month, colspan in months %}
+                            <td class="gantt-head" colspan="{{ colspan }}">{{ month }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for week, colspan in weeks %}
+                            <td class="gantt-head" colspan="{{ colspan }}">S{{ week }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for date, day in dates %}
+                            <td class="gantt-head">{{ day }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% for email, gantt_tasks in gantt_tasks_by_user %}
+                        <tr>
+                            {% for date in dates %}
+                                <td class="gantt-line-cell"></td>
+                            {% endfor %}
+                        </tr>
+                        {% for gantt_task in gantt_tasks %}
+                        <tr>
+                            {% for date, day in dates %}
+                                {% if is_date_checked(gantt_task, date) %}
+                                    <td class="gantt-check gantt-line-cell">&nbsp;</td>
+                                {% else %}
+                                    <td class="gantt-line-cell"></td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <a class="btn btn-green my-5" href="{{ path('gantt_task_new') }}">Nouveau planning</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Créneaux</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for email, gantt_tasks in gantt_tasks_by_user %}
+                <tr>
+                    <td colspan="4">{{ email }}</td>
+                </tr>
+                {% for gantt_task in gantt_tasks %}
+                    <tr>
+                        <td>{{ gantt_task.id }}</td>
+                        <td>{{ gantt_task.name }}</td>
+                        <td>{{ gantt_task.slots }}</td>
+                        <td>
+                            <a href="{{ path('gantt_task_show', {'id': gantt_task.id}) }}">Détails</a>
+                            <a href="{{ path('gantt_task_edit', {'id': gantt_task.id}) }}">Modifier</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4">Aucun enregistrement trouvé.</td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+{% endblock %}

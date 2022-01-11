@@ -1,13 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Category{% endblock %}
+{% block title %}Nouvelle catégorie{% endblock %}
 
 {% block body %}
-<main class="container">
-    <h1 class="mt-5 mb-5">Create new task category</h1>
+    <h1 class="mt-5 my-4">Créer une nouvelle catégorie de tâches</h1>
 
     {{ include('task_category/_form.html.twig') }}
 
-    <a class="mt-5" href="{{ path('task_category_index') }}">Back to list</a>
-<main>
+    <a class="mt-5" href="{{ path('task_category_index') }}">Retour à la liste</a>
 {% endblock %}

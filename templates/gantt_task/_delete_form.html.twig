@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('gantt_task_delete', {'id': gantt_task.id}) }}" onsubmit="return confirm('Etes-vous sûr(e) de vouloir supprimer cet article?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ gantt_task.id) }}">
+    <button class="btn">Supprimer</button>
+</form>

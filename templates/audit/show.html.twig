@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Audit{% endblock %}
+
+{% block body %}
+    <h1>Audit</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ audit.id }}</td>
+            </tr>
+            <tr>
+                <th>Action</th>
+                <td>{{ audit.action }}</td>
+            </tr>
+            <tr>
+                <th>Date de création</th>
+                <td>{{ audit.createdAt ? audit.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('audit_edit', {'id': audit.id}) }}">Modifier</a>
+
+    <a href="{{ path('audit_index') }}">Retour à la liste</a>
+   
+{% endblock %}

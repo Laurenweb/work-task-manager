@@ -71,6 +71,11 @@ class Category
         return $this;
     }
 
+    public function __toString(): string
+    {
+        return $this->title . ' (' . $this->user->getEmail() . ')' ;
+    }
+
     public function getUser(): ?User
     {
         return $this->user;
@@ -107,6 +112,7 @@ class Category
     {
         if (!$this->tasks->contains($task)) {
             $this->tasks[] = $task;
+            $task->setCategory($this);
         }
 
         return $this;
@@ -116,6 +122,9 @@ class Category
     {
         if ($this->tasks->removeElement($task)) {
             // set the owning side to null (unless already changed)
+            if ($task->getCategory() === $this) {
+                $task->setCategory(null);
+            }
         }
 
         return $this;

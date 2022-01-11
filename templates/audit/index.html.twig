@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des audits{% endblock %}
+
+{% block body %}
+    <h1>Liste des audits</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Utilisateur</th>
+                <th>Action</th>
+                <th>Tâches</th>
+                <th>Date de création</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for audit in audits %}
+            <tr>
+                <td>{{ audit.id }}</td>
+                <td>{{ audit.user }}</td>
+                <td>{{ audit.action }}</td>
+                <td>#{{ audit.task.id }}</td>
+                <td>{{ audit.createdAt ? audit.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('audit_show', {'id': audit.id}) }}">Détails</a>
+                    <a href="{{ path('audit_edit', {'id': audit.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucun enregistrement trouvé.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('audit_new') }}">Créer un nouvel audit</a>
+{% endblock %}

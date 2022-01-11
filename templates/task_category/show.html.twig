@@ -3,7 +3,7 @@
 {% block title %}Category{% endblock %}
 
 {% block body %}
-    <h1 class="mt-5">Task Category</h1>
+    <h1 class="mt-5">Catégorie de tâche</h1>
 
     <table class="table">
         <tbody>
@@ -12,15 +12,15 @@
                 <td>{{ task_category.id }}</td>
             </tr>
             <tr>
-                <th>Title</th>
+                <th>Titre</th>
                 <td>{{ task_category.title }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('task_category_edit', {'id': task_category.id}) }}">Update</a>
+    <a href="{{ path('task_category_edit', {'id': task_category.id}) }}">Modifier</a>
 
     {{ include('task_category/_delete_form.html.twig') }}
 
-    <a class="mt-5" href="{{ path('task_category_index') }}">Back to list</a>
+    <a class="mt-5" href="{{ path('task_category_index') }}">Retour à la liste</a>
 {% endblock %}

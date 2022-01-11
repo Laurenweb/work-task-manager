@@ -15,17 +15,17 @@ class CategoryType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => 'Title'
+                'label' => 'Titre'
             ])
             ->add('duration', TextType::class, [
-                'label' => 'Duration',
+                'label' => 'Durée',
                 'required' => false
             ])
             ->add('type', ChoiceType::class, [
                 'choices' => [
                     'Backlog' => 'backlog',
-                    'Done' => 'done',
-                    'Other' => 'other'
+                    'Fin' => 'done',
+                    'Autre' => 'other'
                 ]
             ])
             ->add('next')

@@ -56,6 +56,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $taskCategories;
 
     /**
+     * @ORM\OneToMany(targetEntity=GanttTask::class, mappedBy="user")
+     */
+    private $ganttTasks;
+
+    /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="supervisees")
      */
     private $manager;
@@ -65,14 +70,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $supervisees;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Audit::class, mappedBy="user")
+     */
+    private $audits;
+
+    public function __construct()
+    {
+        $this->reportedTasks = new ArrayCollection();
+        $this->assignedTasks = new ArrayCollection();
+        $this->taskCategories = new ArrayCollection();
+        $this->ganttTasks = new ArrayCollection();
+        $this->supervisees = new ArrayCollection();
+        $this->audits = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
-    
+
     public function getEmail(): ?string
     {
         return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
     }
 
     /**
@@ -155,6 +182,58 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->reportedTasks;
     }
 
+    public function addReportedTask(Task $reportedTask): self
+    {
+        if (!$this->reportedTasks->contains($reportedTask)) {
+            $this->reportedTasks[] = $reportedTask;
+            $reportedTask->setReporter($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReportedTask(Task $reportedTask): self
+    {
+        if ($this->reportedTasks->removeElement($reportedTask)) {
+            // set the owning side to null (unless already changed)
+            if ($reportedTask->getReporter() === $this) {
+                $reportedTask->setReporter(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Task[]
+     */
+    public function getAssignedTasks(): Collection
+    {
+        return $this->assignedTasks;
+    }
+
+    public function addAssignedTask(Task $assignedTask): self
+    {
+        if (!$this->assignedTasks->contains($assignedTask)) {
+            $this->assignedTasks[] = $assignedTask;
+            $assignedTask->setAssignee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAssignedTask(Task $assignedTask): self
+    {
+        if ($this->assignedTasks->removeElement($assignedTask)) {
+            // set the owning side to null (unless already changed)
+            if ($assignedTask->getAssignee() === $this) {
+                $assignedTask->setAssignee(null);
+            }
+        }
+
+        return $this;
+    }
+
     public function __toString(): string
     {
         return $this->email;
@@ -191,11 +270,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection|self[]
+     * @return Collection|GanttTask[]
      */
-    public function getSupervisees(): Collection
+    public function getGanttTasks(): Collection
     {
-        return $this->supervisees;
+        return $this->ganttTasks;
+    }
+
+    public function addGanttTask(GanttTask $ganttTask): self
+    {
+        if (!$this->ganttTasks->contains($ganttTask)) {
+            $this->ganttTasks[] = $ganttTask;
+            $ganttTask->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGanttTask(GanttTask $ganttTask): self
+    {
+        if ($this->ganttTasks->removeElement($ganttTask)) {
+            // set the owning side to null (unless already changed)
+            if ($ganttTask->getUser() === $this) {
+                $ganttTask->setUser(null);
+            }
+        }
+
+        return $this;
     }
 
     public function getManager(): ?self
@@ -208,6 +309,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->manager = $manager;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getSupervisees(): Collection
+    {
+        return $this->supervisees;
     }
 
     public function addSupervisee(self $supervisee): self
@@ -236,5 +345,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $users = $this->getSupervisees()->toArray();
         array_unshift($users, $this);
         return $users;
+    }
+
+    /**
+     * @return Collection|Audit[]
+     */
+    public function getAudits(): Collection
+    {
+        return $this->audits;
+    }
+
+    public function addAudit(Audit $audit): self
+    {
+        if (!$this->audits->contains($audit)) {
+            $this->audits[] = $audit;
+            $audit->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAudit(Audit $audit): self
+    {
+        if ($this->audits->removeElement($audit)) {
+            // set the owning side to null (unless already changed)
+            if ($audit->getUser() === $this) {
+                $audit->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

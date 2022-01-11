@@ -77,6 +77,11 @@ class Task
     private $categories;
 
     /**
+     * @ORM\OneToMany(targetEntity=Audit::class, mappedBy="task", orphanRemoval=true)
+     */
+    private $audits;
+
+    /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="tasks")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -91,6 +96,126 @@ class Task
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $dueAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=GanttTask::class, inversedBy="tasks")
+     */
+    private $project;
+
+    public function __construct()
+    {
+        $this->childrenTasks = new ArrayCollection();
+        $this->categories = new ArrayCollection();
+        $this->audits = new ArrayCollection();
+        $this->timeDetails = new ArrayCollection();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getReporter(): ?User
+    {
+        return $this->reporter;
+    }
+
+    public function setReporter(?User $reporter): self
+    {
+        $this->reporter = $reporter;
+
+        return $this;
+    }
+
+    public function getAssignee(): ?User
+    {
+        return $this->assignee;
+    }
+
+    public function setAssignee(?User $assignee): self
+    {
+        $this->assignee = $assignee;
+
+        return $this;
+    }
+
+    public function getPriority(): ?int
+    {
+        return $this->priority;
+    }
+
+    public function setPriority(?int $priority): self
+    {
+        $this->priority = $priority;
+
+        return $this;
+    }
+
+    public function getExpectedDuration(): ?float
+    {
+        return $this->expectedDuration;
+    }
+
+    public function setExpectedDuration(float $expectedDuration): self
+    {
+        $this->expectedDuration = $expectedDuration;
+
+        return $this;
+    }
+
+    public function getActualDuration(): ?float
+    {
+        return $this->actualDuration;
+    }
+
+    public function setActualDuration(?float $actualDuration): self
+    {
+        $this->actualDuration = $actualDuration;
+
+        return $this;
+    }
+
+    public function getParentTask(): ?self
+    {
+        return $this->parentTask;
+    }
+
+    public function setParentTask(?self $parentTask): self
+    {
+        $this->parentTask = $parentTask;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getChildrenTasks(): Collection
+    {
+        return $this->childrenTasks;
+    }
+
+    public function addChildrenTask(self $childrenTask): self
+    {
+        if (!$this->childrenTasks->contains($childrenTask)) {
+            $this->childrenTasks[] = $childrenTask;
+            $childrenTask->setParentTask($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChildrenTask(self $childrenTask): self
+    {
+        if ($this->childrenTasks->removeElement($childrenTask)) {
+            // set the owning side to null (unless already changed)
+            if ($childrenTask->getParentTask() === $this) {
+                $childrenTask->setParentTask(null);
+            }
+        }
+
+        return $this;
+    }
 
     public function __toString(): string
     {
@@ -161,6 +286,48 @@ class Task
     }
 
     /**
+     * @return Collection|Audit[]
+     */
+    public function getAudits(): Collection
+    {
+        return $this->audits;
+    }
+
+    public function addAudit(Audit $audit): self
+    {
+        if (!$this->audits->contains($audit)) {
+            $this->audits[] = $audit;
+            $audit->setTask($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAudit(Audit $audit): self
+    {
+        if ($this->audits->removeElement($audit)) {
+            // set the owning side to null (unless already changed)
+            if ($audit->getTask() === $this) {
+                $audit->setTask(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
      * @return Collection|TimeDetail[]
      */
     public function getTimeDetails(): Collection
@@ -198,6 +365,18 @@ class Task
     public function setDueAt(?\DateTime $dueAt): self
     {
         $this->dueAt = $dueAt;
+
+        return $this;
+    }
+
+    public function getProject(): ?GanttTask
+    {
+        return $this->project;
+    }
+
+    public function setProject(?GanttTask $project): self
+    {
+        $this->project = $project;
 
         return $this;
     }

@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User index{% endblock %}
+{% block title %}Liste des utilisateurs{% endblock %}
 
 {% block body %}
     <main class="container mt-5">
-        <h1>User index</h1>
+        <h1>Liste des utilisateurs</h1>
 
         <table class="table">
             <thead>
                 <tr>
                     <th>Id</th>
                     <th>Email</th>
-                    <th>Roles</th>
-                    <th>actions</th>
+                    <th>Rôles</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,13 +22,13 @@
                     <td>{{ user.email }}</td>
                     <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                     <td>
-                        <a href="{{ path('organisation_show', {'id': user.id}) }}">show</a>
-                        <a href="{{ path('organisation_edit', {'id': user.id}) }}">edit</a>
+                        <a href="{{ path('organisation_show', {'id': user.id}) }}">Détails</a>
+                        <a href="{{ path('organisation_edit', {'id': user.id}) }}">Modifier</a>
                     </td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="5">no records found</td>
+                    <td colspan="5">Aucun enregistrement trouvé.</td>
                 </tr>
             {% endfor %}
             </tbody>

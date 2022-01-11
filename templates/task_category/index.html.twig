@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Category List{% endblock %}
+{% block title %}Liste des catégories{% endblock %}
 
 {% block body %}
 
 <section class="container">
-    <h1 class="mt-5 mb-5">List of task categories</h1>
+    <h1 class="mt-5 mb-5">Liste des catégories de tâches</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Title</th>
-                <th>Duration</th>
+                <th>Titre</th>
+                <th>Durée</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -36,13 +36,13 @@
             {% endfor %}
         {% else %}
             <tr>
-                <td colspan="3">No records found.</td>
+                <td colspan="3">Aucun enregistrement trouvé.</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-	<a class="btn btn-green" href="{{ path('task_category_new') }}"> <i class="fas fa-plus mr-2"></i>New</a>
+	<a class="btn btn-green" href="{{ path('task_category_new') }}"> <i class="fas fa-plus mr-2"></i>Créer</a>
 
 </section>
 

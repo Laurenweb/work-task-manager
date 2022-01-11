@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit category{% endblock %}
+{% block title %}Modification de catégorie{% endblock %}
 
 {% block body %}
-    <h1 class="mt-5">Edit category</h1>
+    <h1 class="mt-5">Modification de catégorie</h1>
 
-    {{ include('task_category/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('task_category/_form.html.twig', {'button_label': 'Modifier'}) }}
 
     {{ include('task_category/_delete_form.html.twig') }}
 
-    <a class="mt-5" href="{{ path('task_category_index') }}">Back to list</a>
+    <a class="mt-5" href="{{ path('task_category_index') }}">Retour à la liste</a>
 {% endblock %}

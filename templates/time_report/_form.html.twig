@@ -1,7 +1,7 @@
 {{ form_start(form) }}
 <table class="mt-3">
     <tr>
-        <th class="w-50">Tasks (Backlog excluded)</th>
+        <th class="w-50">Tâches (hors backlog)</th>
         {% for date in dates %}
             <th>{{ date | date('l d/m/Y') }}</th>
         {% endfor %}
@@ -15,5 +15,5 @@
 		</tr>
 	{% endfor %}
 </table>
-<button class="btn btn-primary mt-4"><i class="fas fa-check mr-2"></i> Save the report</button>
+<button class="btn btn-primary mt-4"><i class="fas fa-check mr-2"></i> Enregistrer le rapport</button>
 {{ form_end(form) }}

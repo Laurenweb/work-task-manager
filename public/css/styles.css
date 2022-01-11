@@ -17,28 +17,28 @@ a {
 
 a:hover, a:focus {
     text-decoration: underline;
-    color: #6e3d7a;
+    color: #73c2aa;
 }
 
 .btn-info {
     color: #fff;
-    background-color: #ad83b8;
-    border-color: #6e3d7a; /*set the color you want here*/
+    background-color: #914D9E;
+    border-color: #2c0235; /*set the color you want here*/
 }
 
 .btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .btn-info:active:focus, .open>.dropdown-toggle.btn-info {
     color: #fff;
-    background-color: #ad83b8;
-    border-color: #6e3d7a; /*set the color you want here*/
+    background-color: #914D9E;
+    border-color: #2c0235; /*set the color you want here*/
 }
 
-#xoButton {
-    background-color: #744c7e;
+#loginButton {
+    background-color: #914D9E;
     color: rgb(255, 255, 255);
 }
 
 .btn-green {
-    background-color: #744c7e;
+    background-color: #4EC8A3;
     color: rgb(255, 255, 255);
 }
 

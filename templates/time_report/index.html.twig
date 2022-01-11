@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Reports{% endblock %}
+{% block title %}Mes rapports{% endblock %}
 
 {% block body %}
     <div class="container pt-4">
-        <h1>My reports</h1>
+        <h1>Mes rapports</h1>
 
-        <a class="btn btn-primary my-4" href="{{ path('time_report_new', {'adate': adate}) }}"><i class="fas fa-plus mr-2"></i> New report</a>
+        <a class="btn btn-primary my-4" href="{{ path('time_report_new', {'adate': adate}) }}"><i class="fas fa-plus mr-2"></i> Créer un nouveau rapport</a>
 
         <table class="table">
             <thead>
                 <tr>
-                    <th>Created at</th>
-                    <th>Due date</th>
+                    <th>Date de début</th>
+                    <th>Date de fin</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -22,13 +22,13 @@
                     <td>{{ time_report.startingAt ? time_report.startingAt|date('d/m/Y') : '' }}</td>
                     <td>{{ time_report.endingAt ? time_report.endingAt|date('d/m/Y') : '' }}</td>
                     <td>
-                        <a href="{{ path('time_report_show', {'id': time_report.id}) }}">Details</a>
-                        <a href="{{ path('time_report_edit', {'id': time_report.id}) }}">Edit</a>
+                        <a href="{{ path('time_report_show', {'id': time_report.id}) }}">Détails</a>
+                        <a href="{{ path('time_report_edit', {'id': time_report.id}) }}">Modifier</a>
                     </td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="4">No records found</td>
+                    <td colspan="4">Aucun enregistrement trouvé.</td>
                 </tr>
             {% endfor %}
             </tbody>

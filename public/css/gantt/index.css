@@ -1,0 +1,38 @@
+.gantt-check {
+    background-color: #48cfae;
+}
+
+.gantt-chart {
+    font-size: 10px;
+}
+
+.gantt-head {
+    text-align: center;
+    padding: 0 5px;
+}
+
+.gantt-timeline {
+    overflow-x: scroll;
+}
+
+.gantt-timeline table {
+    border-collapse: collapse;
+}
+
+.gantt-timeline td {
+    border: 1px solid #EEE;
+}
+
+.gantt-timeline tr:hover {
+    background-color: #def1ed;
+}
+
+.gantt-line-cell {
+    height: 25px;
+    vertical-align: middle;
+}
+
+.gantt-actor {
+    color: #48cfae;
+    border-top: 1px solid #48cfae;
+}

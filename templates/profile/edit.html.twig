@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Profile update{% endblock %}
+{% block title %}Modification du profil{% endblock %}
 
 {% block body %}
-    <h1 class="mt-5">Profile update</h1>
+<main class="container">
+    <h1 class="mt-5">Modification du profil</h1>
 
     {{ include('profile/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('home') }}">Back to homepage</a>
+    <a href="{{ path('home') }}">Retour à l'accueil</a>
+<main>
 {% endblock %}

@@ -1,14 +1,14 @@
-<h1 style="background-color: #2f57ae; color: #FFF; padding: 5px;">New Task</h1>
+<h1 style="background-color: #2f57ae; color: #FFF; padding: 5px;">Création d'une nouvelle tâche</h1>
 <div>
-    A new task has been created by {{ task.reporter.email }}.<br /><br />
+    Une nouvelle tâche a été créé par {{ task.reporter.email }}.<br /><br />
     <h2>#{{ task.id }}  {{ task.title }}</h2>
     <div style="margin-bottom: 10px;">
-        Estimate duration : {{ task.expectedDuration | to_hours_or_days }}
+        Durée initialement estimée : {{ task.expectedDuration | to_hours_or_days }}
     </div>
     <div style="color: #AAA; border: 1px solid #AAA; padding: 5px;">
         {{ task.description | raw }}
     </div>
     <div style="margin-top: 20px;">
-        <a href="{{ absolute_url(path('task_filter_index', {'id': task.categories[0].id })) }}">View tasks list {{ task.categories[0].title }}</a>
+        <a href="{{ absolute_url(path('task_filter_index', {'id': task.categories[0].id })) }}">Voir la liste de tâches {{ task.categories[0].title }}</a>
     </div>
 </div>
